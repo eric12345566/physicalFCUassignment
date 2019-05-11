@@ -23,6 +23,6 @@ and start the main.py with:
 
     python3 main.py
 
-it will show is web browser (if you're os are windows, maybe will show with the native desktop screen). 
+it will show in web browser (if you're os are windows, maybe will show with the native desktop screen). 
 
 enjoy!
