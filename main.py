@@ -9,16 +9,16 @@ from vpython import *
 # physical const setting
 k = 9*10**9 # k for n2 
 em = 9.10938356 * 10**(-31) # electron's mass
-r = 25
+r = 0.25 # two sphere distance (m)
 
 # others constent
 c1 = 3*10**(-9) # right point +3.00nC
 c2 = 2*10**(-9) # left point +2.00nC
 e = (-1.602) * 10 ** (-19) # electron charge
 t = 0  # total time
-dt = 0.00000001  # small time 
+dt = 0.00000000001  # small time 
 
-bSize = 1 # point size
+bSize = 0.01 # point size (m)
 
 # electron's acceleration
 ea = ( ((k*c1*e)/r**2) - ((k*c2*e)/((0.5-r)**2)) ) / em 
@@ -30,17 +30,21 @@ scene = canvas(title="Exercise Simulation" , width = 600, height = 600, x = 0, y
 pe = sphere(pos = vector(0, 0, 0), radius = bSize, color = color.blue)
 pe.v = vector(0, 0, 0)
 pe.a = vector(ea, 0, 0)
-p1 = sphere(pos = vector(-25, 0, 0), radius = bSize, color = color.red)
-p2 = sphere(pos = vector(25, 0, 0), radius = bSize, color = color.red)
 
-gd = graph(title = "F/t", width = 600, height = 450, x = 0, y = 600, xtitle = "t(s)", ytitle = "a(cm/s^2)")
+# 1st ball's initial place
+p1 = sphere(pos = vector(-0.25, 0, 0), radius = bSize, color = color.red)
+
+# 2ed ball's initial place
+p2 = sphere(pos = vector(0.25, 0, 0), radius = bSize, color = color.red)
+
+gd = graph(title = "F/t", width = 600, height = 450, x = 0, y = 600, xtitle = "t(s)", ytitle = "a(m/s^2)")
 eat = gcurve(graph = gd, color = color.blue) 
 
 
 
 print("first ea: ", ea)
-while( (pe.pos.x - p1.pos.x) >= 10 ):
-  rate(1000)
+while( (pe.pos.x - p1.pos.x) >= 0.10 ):
+  rate(10000)
   pe.a = vector(ea, 0, 0)
   # print("pe.a: ", pe.a)
   pe.v += pe.a * dt
